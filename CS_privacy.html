@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Customer privacy</title>
+	<link rel="stylesheet" href="static/assignment_css.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="static/assignmentScript.js" type="text/javascript"></script>
+	<header class="top">
+	<a id="size" class="resize"></a>
+	<a id="Lmodify" class="left">.</a>
+	<br>
+	<p> Welcome {{name}}!</p>
+	</header>
+</head>
+<body onresize="resize()" onload="Lastmodify()" style="margin: unset;">
+	<div id="Page">
+		<div id="navigation">
+			<ul>
+			  <li><a class="nav" href="customer.html" name="content">Home</a></li>
+			  <li><a class="nav" href="CS_shoppingCart.html" name="content">Shopping Cart</a></li>
+			</ul>
+		</div>
+		<div id="navigation1">
+			<ul>
+			  <li><a href="login.html" class="nav1">Logout</a></li>
+			  <li><a href="CS_privacy.html" class="nav1">privacy</a></li>
+			</ul>
+		</div>
+		<div id="content">
+			<form action ="assignment.py" method="POST">
+			<label for="username">Customer Name:</label>
+  			<input type="text" id="username" name="customer_name" placeholder="customer name"><br>
+			Gender:
+			<input type="radio" id="male" name="gender" value="male">
+			<label for="male">Male</label>
+			<input type="radio" id="female" name="gender" value="female">
+			<label for="female">Female</label><br>
+
+			<p>Contact:
+			<input type="tel" id="contact" name="contact" placeholder="12345678" pattern="[0-9]{8}" required></p>
+
+			<p>Customer Login name:
+			<input type="text"  id="CS_loginname" name="login_name" placeholder="login name"></p>
+
+		 	<p>Customer Password:
+		 	<input type="text" id="Password" name="login_Password" placeholder="Password"></p>
+
+		 	<div id ="signin_button">
+			 	<input type="submit" value="Save">
+	  			<input type="reset" value="Reset">
+  			</div>
+
+			<div id="footer">
+				<button onmouseover="document.getElementById('Ctime').innerHTML = Date()"> Current Time
+				</button>
+				<a id="Ctime"></a>
+			</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>
