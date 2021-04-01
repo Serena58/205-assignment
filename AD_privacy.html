@@ -12,7 +12,6 @@
 	<a id="size" class="resize"></a>
 	<a id="Lmodify" class="left">.</a>
 	<br>
-	<p> Welcome {{name}}!</p>
 	</header>
 </head>
 <body onresize="resize()" onload="Lastmodify()" style="margin: unset;">
@@ -29,28 +28,23 @@
 			</ul>
 		</div>
 		<div id="content">
-			<form action ="assignment.py" method="POST">
-			<label for="username">Customer Name:</label>
-  			<input type="text" id="username" name="customer_name" placeholder="customer name"><br>
+			<form action ="/AD_Updateprivacy" method="POST">
+			<label for="username">Admin Name:*</label>
+  			<input type="text"  name="admin_name" placeholder="customer name"><br>
 			Gender:
 			<input type="radio" id="male" name="gender" value="male">
 			<label for="male">Male</label>
 			<input type="radio" id="female" name="gender" value="female">
 			<label for="female">Female</label><br>
 
-			<p>Contact:
-			<input type="tel" id="contact" name="contact" placeholder="12345678" pattern="[0-9]{8}" required></p>
+			<p>Admin Login name:*
+			<input type="text"  name="AD_loginName" placeholder="login name"></p>
 
-			<p>Customer Login name:
-			<input type="text"  id="CS_loginname" name="login_name" placeholder="login name"></p>
+		 	<p>Admin Password:*
+		 	<input type="text" id="AD_Password" name="AD_Password" placeholder="Password"></p>
 
-		 	<p>Customer Password:
-		 	<input type="text" id="Password" name="login_Password" placeholder="Password"></p>
+			 <input type="submit" value="Save">
 
-		 	<div id ="signin_button">
-			 	<input type="submit" value="Save">
-	  			<input type="reset" value="Reset">
-  			</div>
   			</form>
   		</div>
 	</div>

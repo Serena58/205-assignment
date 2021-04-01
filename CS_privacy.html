@@ -11,7 +11,6 @@
 	<a id="size" class="resize"></a>
 	<a id="Lmodify" class="left">.</a>
 	<br>
-	<p> Welcome {{name}}!</p>
 	</header>
 </head>
 <body onresize="resize()" onload="Lastmodify()" style="margin: unset;">
@@ -29,7 +28,7 @@
 			</ul>
 		</div>
 		<div id="content">
-			<form action ="assignment.py" method="POST">
+			<form action ="CS_updatePrivacy" method="POST">
 			<label for="username">Customer Name:</label>
   			<input type="text" id="username" name="customer_name" placeholder="customer name"><br>
 			Gender:
@@ -46,11 +45,22 @@
 
 		 	<p>Customer Password:
 		 	<input type="text" id="Password" name="login_Password" placeholder="Password"></p>
-
+<!--
 		 	<div id ="signin_button">
 			 	<input type="submit" value="Save">
-	  			<input type="reset" value="Reset">
   			</div>
+  			-->
+			<input type="submit" value="Save">
+
+  			{% for item in CS_privacy %}
+  			<tr>
+  				<td>{{ item[1] }}</td>
+  				<td>{{ item[2] }}</td>
+  				<td>{{ item[3] }}</td>
+  				<td>{{ item[4] }}</td>
+  				<td>{{ item[5] }}<td>
+			</tr>
+			{% endfor %}
 
 			<div id="footer">
 				<button onmouseover="document.getElementById('Ctime').innerHTML = Date()"> Current Time

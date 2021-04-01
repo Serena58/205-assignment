@@ -12,7 +12,6 @@
 	<a id="size" class="resize"></a>
 	<a id="Lmodify" class="left">.</a>
 	<br>
-	<p> Welcome {{name}}!</p>
 	</header>
 </head>
 <body onresize="resize()" onload="Lastmodify()" style="margin: unset;">
@@ -33,6 +32,13 @@
 			<a style="font-size:30px">
 				<b><center>Please check the order:</center></b>
 				display data</a>
+
+			<ul>
+			  {% for data in email_addresses %}
+			  <li>{{ email[0] }}</li>
+			  {% endfor %}
+			</ul>
+
 			<div id="footer">
 				<button onmouseover="document.getElementById('Ctime').innerHTML = Date()"> Current Time
 				</button>

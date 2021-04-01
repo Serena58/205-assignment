@@ -12,23 +12,28 @@
 	<div id="login_content">
 		<div id="login_form">
 			<a style="font-size: 20px"><b> Please fill in the information to sign up an a customer account!</a></b>
-			<form action ="assignment.py" method="POST">
-			<label for="username">Customer Name:</label>
+			<form action ="/signup" method="POST">
+			<a>Customer Name*:</a>
   			<input type="text" id="username" name="customer_name" placeholder="customer name"><br>
-			Gender:
+
+			<p>Gender*:
 			<input type="radio" id="male" name="gender" value="male">
 			<label for="male">Male</label>
 			<input type="radio" id="female" name="gender" value="female">
-			<label for="female">Female</label><br>
+			<label for="female">Female</label></p>
 
-			<p>Contact:
+			<p>Contact*:
 			<input type="tel" id="contact" name="contact" placeholder="12345678" pattern="[0-9]{8}" required></p>
 
-			<p>Customer Login name:
+			<p>Customer Login name*:
 			<input type="text"  id="CS_loginname" name="login_name" placeholder="login name"></p>
 
-		 	<p>Customer Password:
+		 	<p>Customer Password*:
 		 	<input type="text" id="Password" name="login_Password" placeholder="Password"></p>
+
+		 	{% if error%}
+		 	<P style="text-align: left"> {{msg}} </P>
+		 	{% endif %}
 
 		 	<div id ="signup_button">
 			 	<input type="submit" value="Submit">

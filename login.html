@@ -12,12 +12,12 @@
 	<div id="login_content">
 		<div id="login_form">
 			<p style="font-size: 20px"><b> Please log in with your account and password!</p></b>
-			<form action ="" method="POST">
+			<form action ="/login" method="POST">
 			Login name:
-			<input type="text"  name="username" placeholder="login name" value="{{request.form.username}}">
+			<input type="text"  name="loginName" placeholder="login name" >
 		 	<br><br>
 		 	Password:
-		 	<input type="text" name="password" placeholder="Password" value="{{request.form.password}}"><br>
+		 	<input type="text" name="loginPassword" placeholder="Password"><br>
 			
 			{% if error%}
 		 	<a style="text-align: left"> Error: {{ error }}</a>
