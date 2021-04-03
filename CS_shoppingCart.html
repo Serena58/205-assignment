@@ -34,8 +34,10 @@
 				display data</a>
 
 			<ul>
-			  {% for data in email_addresses %}
-			  <li>{{ email[0] }}</li>
+			  {% for item in shoppingCart %}
+			  <li>{{ item[1] }}</li>
+			  <li>{{ item[2] }}</li>
+			  <li>{{ item[3] }}</li>
 			  {% endfor %}
 			</ul>
 
