@@ -35,6 +35,40 @@ def CS_login():
 
 @app.route('/customer',methods =['post'])
 def CustomerModify():
+	if request.method =='POST':
+		E1_quantity=request.form['E1_quantity']
+		E2_quantity=request.form['E2_quantity']
+		D1_quantity=request.form['D1_quantity']
+		D2_quantity=request.form['D2_quantity']
+
+		cursor=db.cursor()
+		if E1_quantity !="":
+			cursor.execute("INSERT INTO customer_order(`customer_id`,`item code`,\
+				`quantity`) VALUES ('4','ear001',%s)",[E1_quantity])
+			db.commit()
+			print("insert ear001 successfully!")
+
+		if E2_quantity!="":
+			cursor.execute("INSERT INTO customer_order(`customer_id`,`item code`,\
+				`quantity`) VALUES  ('4','ear002',%s)",[E2_quantity])
+			db.commit()
+			print("insert ear002 successfully!")
+
+		if D1_quantity!="":
+			cursor.execute("INSERT INTO customer_order(`customer_id`,`item code`,\
+				`quantity`) VALUES  ('4','dress001',%s)",[D1_quantity])
+			db.commit()
+			print("insert dress001 successfully!")
+
+		if D2_quantity!="":
+			cursor.execute("INSERT INTO customer_order(`customer_id`,`item code`,\
+				`quantity`) VALUES  ('4','dress002',%s)",[D2_quantity])
+			db.commit()
+			print("insert dress002 successfully!")
+		else:
+			print ("nothing changed")
+
+		db.close()
 	return render_template('customer.html')
 	'''
 	if request.method =='POST':
@@ -62,34 +96,48 @@ def CS_UpdateP():
 		CS_login =request.form['login_name']
 		CS_PW =request.form['login_Password']
 
-		
 		cursor = db.cursor()
-		cursor.execute("Update customer_login set customer_name=%s where customer_id ='3'", [username])
+
+		cursor.execute("Update customer_login set customer_name=%s where customer_id ='4'", [username])
 		db.commit()
 
-		cursor.execute("Update customer_login set gender=%s where customer_id ='3'", [gender])
+		cursor.execute("Update customer_login set gender=%s where customer_id ='4'", [gender])
 		db.commit()
 
-		cursor.execute("Update customer_login set LoginName=%s where customer_id ='3'", [CS_login])
+		cursor.execute("Update customer_login set LoginName=%s where customer_id ='4'", [CS_login])
 		db.commit()
 
-		cursor.execute("Update customer_login set Password =%s where customer_id ='3'", [CS_PW])
+		cursor.execute("Update customer_login set Password =%s where customer_id ='4'", [CS_PW])
 		db.commit()
 
-		cursor.execute("Update customer_login set Contact =%s where customer_id ='3'", [Contact])
+		cursor.execute("Update customer_login set Contact =%s where customer_id ='4'", [Contact])
 		db.commit()
 
 		print("successfully update")
 		db.close()
-		return redirect(url_for('CS_login'))
+		return render_template('customer.html',name=username)
 
 #CS_shoppingcart
 
 @app.route('/CS_shoppingCart.html')
 def CS_shoppingCart():
-    return render_template('CS_shoppingCart.html')
+	return redirect(url_for('CS_shoppingCart'))
 
-'''admin
+@app.route('/CS_shoppingCart')
+def shoppingCart():
+	cursor=db.cursor()
+
+	cursor.execute("SELECT * from customer_order where customer_id='4'")
+	ShoppingCart= cursor.fetchall()
+	db.commit()
+	for row in ShoppingCart:
+		print(row,'\n')
+	db.close()
+
+	return render_template('CS_shoppingCart.html', shoppingCart=ShoppingCart)
+
+'''
+admin
 - modify item
 -update privacy
 '''
@@ -122,12 +170,6 @@ def AdminModify():
 		db.close()
 		return render_template('admin.html')
 
-'''
-		cursor.execute("select admin_name from admin_login where admin_id='AD004'")
-		AD_name=cursor.fetchone()
-		db.commit()
-'''
-
 #update AD_privacy
 @app.route('/AD_privacy.html')
 def AD_privacy():
@@ -156,7 +198,7 @@ def AD_UpdateP():
 		db.commit()
 	
 		print("successfully update")
-		return render_template('admin.html')
+		return render_template('admin.html',name=username)
 
 '''
 sign up
@@ -177,10 +219,11 @@ def signup():
 		CS_PW =request.form['login_Password']
 
 		cursor = db.cursor()
-		cursor.execute("INSERT INTO customer_login(customer_name,gender,LoginName,Password,Contact) VALUES (%s,%s,%s,%s,%s)", [username,gender,CS_login,CS_PW,Contact,])
+		cursor.execute("INSERT INTO customer_login(customer_name,gender,\
+			LoginName,Password,Contact) VALUES (%s,%s,%s,%s,%s)",\
+			 [username,gender,CS_login,CS_PW,Contact,])
 		db.commit()
 		return redirect(url_for('signup_cs'))
-		db.close()
 	else:
 		print ("error")
 '''
@@ -193,66 +236,35 @@ def loginA():
 
 @app.route('/login', methods=['GET','POST'])
 def login():
-	if request.method=='POST':
-		login =request.form['loginName']
-		PW =request.form['loginPassword']
+	if request.method =='POST':
+		if 'loginName' in request.form and 'loginPassword' in request.form:
+			loginName =request.form['loginName']
+			loginPW =request.form['loginPassword']
 
-		cursor = db.cursor()
-		cursor.execute("select customer_name from customer_login where customer_id='3'")
-		CS_name=cursor.fetchone()
-		db.commit()
+			cursor = db.cursor()
 
-		cursor.execute("select admin_name from admin_login where admin_id='AD004'")
-		AD_name=cursor.fetchone()
-		db.commit()
+			cursor.execute("SELECT * from customer_login where LoginName=%s AND Password=%s",(loginName,loginPW))
+			customer= cursor.fetchall()
+			print (customer)
+			db.commit()
 
-		if request.form['loginName'] == 'admin' or request.form['loginPassword'] =='admin':
-			return render_template('admin.html', name=AD_name)
-		elif request.form['loginName'] =='customer' or request.form['loginPassword'] =='customer':
-			return render_template('customer.html', name=CS_name)
-		else:
-			return render_template('login_fail.html')
+			for row in customer:
+				if row[3] == loginName and row[4] == loginPW:
+					return render_template('customer.html',name=row[1])
+				else:
+					return render_template('login_fail.html')
 
+			cursor.execute("SELECT * from admin_login where LoginName=%s AND Password=%s",(loginName,loginPW))
+			admin= cursor.fetchall()
+			print (admin)
+			db.commit()
+
+			for row in admin:
+				if row[3] == loginName and row[4] == loginPW:
+					return render_template('admin.html',name=row[1])
+				else:
+					return render_template('login_fail.html')
 	return render_template('login.html')
-'''
-@app.route('/login', methods=['GET','POST'])
-def login():
-	error=None
-	msg = ''
-    if request.method == 'POST' and 'login_name' in request.form and 'login_Password' in request.form :
-	        CS_login = request.form['login_name']
-	        CS_PW = request.form['login_Password']
-
-	        cursor = db.cursor()
-	        cursor.execute('SELECT * FROM customer_name WHERE LoginName = % s AND Password = % s', (username, password, ))
-	        account = cursor.fetchone()
-	        if account:
-	            session['loggedin'] = True
-	            session['id'] = account['id']
-	            session['username'] = account['username']
-	            msg = 'Logged in successfully !'
-	            return render_template('customer.html', msg = msg)
-	        else:
-	            msg = 'Incorrect username / password !'
-	        db.commit()
-    return render_template('login.html', msg = msg)
-	
-
-	if request.method=='POST':
-		username = request.form['customer_name']
-		gender =request.form['gender']
-		Contact =request.form['contact']
-		CS_login =request.form['login_name']
-		CS_PW =request.form['login_Password']
-
-		if request.form['username'] != 'admin' or request.form['password'] !='admin':
-			error = 'invalid input'
-		else:
-			return redirect(url_for('admin'))
-	return render_template('login.html',error=error)
-
-'''
-
 
 if __name__ == '__main__':
 	app.debug = True
