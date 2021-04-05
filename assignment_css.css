@@ -104,7 +104,7 @@ li a:hover {
 }
 
 #login_form{
-	height:300px;
+	height:500px;
 	width:600px;
 	background-image:url('background_6grid.jpg');
 	text-align: center;
@@ -140,8 +140,6 @@ li a:hover {
 	width:300px;
 	height:22px;
 	background-color:none;
-	margin-top:40px;
-	margin-bottom: 10px;
 	margin-left:30px;
 	padding: 14px 28px 30px;
 	font-size:20px;
@@ -161,4 +159,3 @@ li a:hover {
 	background-repeat: no-repeat;
 	background-position: fixed;
 }
-
