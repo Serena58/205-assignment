@@ -13,8 +13,8 @@
 		<div id="login_form">
 			<a style="font-size: 20px"><b> Please fill in the information to sign up an a customer account!</a></b>
 			<form action ="/signup" method="POST">
-			<a>Customer Name*:</a>
-  			<input type="text" id="username" name="customer_name" placeholder="customer name"><br>
+			<a>Customer Name*:
+  			<input type="text" id="username" name="customer_name" placeholder="customer name"></a><br>
 
 			<p>Gender*:
 			<input type="radio" id="male" name="gender" value="male">
@@ -23,22 +23,23 @@
 			<label for="female">Female</label></p>
 
 			<p>Contact*:
-			<input type="tel" id="contact" name="contact" placeholder="12345678" pattern="[0-9]{8}" required></p>
+			<input type="tel" id="contact" name="contact" placeholder="12345678" ></p>
 
 			<p>Customer Login name*:
 			<input type="text"  id="CS_loginname" name="login_name" placeholder="login name"></p>
 
-		 	<p>Customer Password*:
-		 	<input type="text" id="Password" name="login_Password" placeholder="Password"></p>
+		 	<a>Customer Password*:
+		 	<input type="text" id="Password" name="login_Password" placeholder="Password"></a><br>
 
-		 	{% if error%}
-		 	<P style="text-align: left"> {{msg}} </P>
-		 	{% endif %}
-
-		 	<div id ="signup_button">
-			 	<input type="submit" value="Submit">
-	  			<input type="reset" value="reset">
-  			</div>
+		 		{{msg}}<br>
+		 		{{msg1}}<br>
+		 		{{msg2}}<br>
+		 		{{msg3}}<br>
+		 		{{msg4}}<br>
+		 	
+			<input type="submit" value="Submit">
+	  		<input type="reset" value="reset">
+  			
 			</form>
 	 	</div>
 	 	<br>

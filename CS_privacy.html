@@ -38,7 +38,7 @@
 			<label for="female">Female</label><br>
 
 			<p>Contact:
-			<input type="tel" id="contact" name="contact" placeholder="12345678" pattern="[0-9]{8}" required></p>
+			<input type="tel" id="contact" name="contact" placeholder="12345678" ></p>
 
 			<p>Customer Login name:
 			<input type="text"  id="CS_loginname" name="login_name" placeholder="login name"></p>
@@ -50,17 +50,13 @@
 			 	<input type="submit" value="Save">
   			</div>
   			-->
-			<input type="submit" value="Save">
+			<input type="submit" value="Save"><br>
 
-  			{% for item in CS_privacy %}
-  			<tr>
-  				<td>{{ item[1] }}</td>
-  				<td>{{ item[2] }}</td>
-  				<td>{{ item[3] }}</td>
-  				<td>{{ item[4] }}</td>
-  				<td>{{ item[5] }}<td>
-			</tr>
-			{% endfor %}
+  			{{msg}}<br>
+  			{{msg1}}<br>
+  			{{msg2}}<br>
+  			{{msg3}}<br>
+  			{{msg4}}<br>
 
 			<div id="footer">
 				<button onmouseover="document.getElementById('Ctime').innerHTML = Date()"> Current Time

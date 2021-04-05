@@ -30,16 +30,21 @@
 		</div>
 		<div id="content">
 			<a style="font-size:30px">
-				<b><center>Please check the order:</center></b>
-				display data</a>
+			<b><center>Please check the order:</center></b>
+			</a>
 
-			<ul>
-			  {% for item in shoppingCart %}
-			  <li>{{ item[1] }}</li>
-			  <li>{{ item[2] }}</li>
-			  <li>{{ item[3] }}</li>
-			  {% endfor %}
-			</ul>
+			<table border="1">
+				<tr>
+					<th>item code</th>
+					<th>Quantity</th>
+				</tr>
+				{% for item in shoppingCart %}
+					<tr>
+					  <td>{{ item[2] }}</td>
+					  <td>{{ item[3] }}</td>
+					</tr>
+				{% endfor %}
+			</table>
 
 			<div id="footer">
 				<button onmouseover="document.getElementById('Ctime').innerHTML = Date()"> Current Time

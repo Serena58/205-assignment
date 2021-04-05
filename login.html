@@ -13,20 +13,20 @@
 		<div id="login_form">
 			<p style="font-size: 20px"><b> Please log in with your account and password!</p></b>
 			<form action ="/login" method="POST">
-			Login name:
-			<input type="text"  name="loginName" placeholder="login name" >
-		 	<br><br>
-		 	Password:
-		 	<input type="text" name="loginPassword" placeholder="Password"><br>
-			
-			{% if error%}
-		 	<a style="text-align: left"> Error: {{ error }}</a>
-		 	{% endif %}
+				Login name:
+				<input type="text"  name="loginName" placeholder="login name" >
+			 	<br><br>
+			 	Password:
+			 	<input type="text" name="loginPassword" placeholder="Password"><br>
+				
+				{% if error%}
+			 	<a style="text-align: left"> Error: {{ error }}</a>
+			 	{% endif %}
 
-		 	<div id="login_button">
-			 	<input type="submit" value="Sign in">
-			 	<button id="right"><a href="signup_cs.html"> Sign up</button></a>
-		 	</div>
+			 	<div id="login_button">
+				 	<input type="submit" value="Sign in">
+				 	<button id="right"><a href="signup_cs.html"> Sign up</button></a>
+			 	</div>
 
 		 	</form>
 		 
