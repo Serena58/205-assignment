@@ -37,6 +37,7 @@ def CustomerModify():
 
 		cursor=db.cursor()
 		db.ping(reconnect=True)
+
 		if E1_quantity !="":
 			cursor.execute("INSERT INTO customer_order(`customer_id`,`item code`,\
 				`quantity`) VALUES ('4','ear001',%s)",[E1_quantity])
@@ -85,6 +86,7 @@ def CS_UpdateP():
 	msg2=""
 	msg3=""
 	msg4=""
+
 	if request.method=='POST':
 		username = request.form['customer_name']
 		gender =request.form['gender']
@@ -127,6 +129,7 @@ def CS_UpdateP():
 			CS_PWValid=False
 			if not CS_PWValid:
 				msg4="Password can not be empty!"
+
 		if usernameValid == True and ContactValid == True and CS_loginValid == True and CS_PWValid ==True:
 
 			cursor.execute("Update customer_login set customer_name=%s where customer_id ='4'", [username])
@@ -146,7 +149,7 @@ def CS_UpdateP():
 
 			msg="successfully update"
 			db.close()
-		return render_template('CS_privacy.html',name=username,msg=msg,msg1=msg1,msg2=msg2,msg3=msg3,msg4=msg4)
+		return render_template('CS_privacy.html',msg=msg,msg1=msg1,msg2=msg2,msg3=msg3,msg4=msg4)
 
 #CS_shoppingcart
 
@@ -189,17 +192,21 @@ def AdminModify():
 		cursor=db.cursor()
 		db.ping(reconnect=True)
 
-		cursor.execute("Update inventory set quantity=%s where item_code ='ear001'", [E1_quantity])
-		db.commit()
+		if E1_quantity!="":
+			cursor.execute("Update inventory set quantity=%s where item_code ='ear001'", [E1_quantity])
+			db.commit()
 
-		cursor.execute("Update inventory set quantity=%s where item_code ='ear002'", [E2_quantity])
-		db.commit()
+		if E2_quantity!="":
+			cursor.execute("Update inventory set quantity=%s where item_code ='ear002'", [E2_quantity])
+			db.commit()
 
-		cursor.execute("Update inventory set quantity=%s where item_code ='dress001'", [D1_quantity])
-		db.commit()
+		if D1_quantity!="":
+			cursor.execute("Update inventory set quantity=%s where item_code ='dress001'", [D1_quantity])
+			db.commit()
 
-		cursor.execute("Update inventory set quantity=%s where item_code ='dress001'", [D2_quantity])
-		db.commit()
+		if D2_quantity!="":
+			cursor.execute("Update inventory set quantity=%s where item_code ='dress002'", [D2_quantity])
+			db.commit()
 
 		db.close()
 		return render_template('admin.html')
@@ -215,6 +222,7 @@ def AD_UpdateP():
 	msg1=""
 	msg2=""
 	msg3=""
+
 	if request.method=='POST':
 		username = request.form['admin_name']
 		gender =request.form['gender']
@@ -261,7 +269,8 @@ def AD_UpdateP():
 			cursor.execute("Update admin_login set Password =%s where Admin_id ='AD004'", [AD_PW])
 			db.commit()
 			msg="successfully update"
-		return render_template('AD_privacy.html',name=username,msg=msg,msg1=msg1,msg2=msg2,msg3=msg3)
+
+		return render_template('AD_privacy.html',msg=msg,msg1=msg1,msg2=msg2,msg3=msg3)
 
 '''
 sign up
@@ -279,6 +288,7 @@ def signup():
 	msg2=""
 	msg3=""
 	msg4=""
+
 	if request.method=='POST':
 		username = request.form['customer_name']
 		gender =request.form['gender']
@@ -328,6 +338,7 @@ def signup():
 			[username,gender,CS_login,CS_PW,Contact,])
 			db.commit()
 			msg="signup successful!"
+
 		return render_template('signup_cs.html',msg=msg,msg1=msg1,msg2=msg2,msg3=msg3,msg4=msg4)
 
 '''
@@ -368,6 +379,7 @@ def login():
 
 			error="invalid input!"
 			db.close()
+			
 	return render_template('login.html',error=error)
 
 if __name__ == '__main__':
